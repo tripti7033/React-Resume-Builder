@@ -1,0 +1,152 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+.nav_bar{
+    height: 4rem;
+    width: 100%;
+    /* color: rgb(19, 22, 22); */
+    background-color: rgb(197, 241, 241);
+    border-bottom: 0.1rem solid rgb(240, 224, 224);
+    /* position: fixed; */
+}
+.nav_bar_menu{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.nav_bar_menu a{
+    text-decoration: none;
+    font-size: 1.5rem;
+    color: black;
+
+}
+
+.err_page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* //=================          home_container */
+.home_container{
+    height: 100vh;
+    width: 100%;
+    background-color: rgb(250, 234, 214);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.home_container_content h1{
+    /* font-size: 5rem; */
+}
+.home_container_content p{
+    font-size: 1.5rem;
+    text-align: center;
+}
+.home_container_btn{
+    height: 3rem;
+    width: 15rem;
+    background-color: rgb(91, 69, 220);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.home_container_btn a{
+    text-decoration: none;
+    font-size: 2rem;
+    
+    /* background-color: blue; */
+    color: white;
+}
+
+/* //=========================  login */
+
+.login_container_form{
+    
+    height: calc(100vh - 64px);
+    background-color: antiquewhite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login_container{
+   width: 30%;
+   padding: 20px;
+   background: rgba(163, 163, 163, 0.132);
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+  
+
+/* }
+.input_box{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;    
+}
+.input_box label{
+    font-size: 1.5rem;
+    color: rgb(34, 32, 32);
+}
+.input_box input{
+    height: 2rem;
+    width: 15rem;
+    border: none;
+    border-radius: 1rem;
+    /* font-size: 2rem; */
+    
+
+} */
+
+/* //=======================   resume form========================== */
+.p_form_container{
+    display: grid;
+    grid-template-columns: column(2);
+}
+.resume_form{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: flex-start; */
+    align-items: center;
+   margin: 1.2rem 0rem;
+
+}
+
+.resume_form label{
+    font-size: 1.2rem;
+    color: rgb(46, 45, 45);
+    display: flex;
+    justify-content: flex-start;
+
+}
+.resume_form input{
+    font-size: 1.2rem;
+    height: 2.5rem;
+    width: 30rem;
+    border-radius: 0.5rem;
+    border: none;
+    /* border: 0.1rem solid black; */
+    background-color: rgb(238, 237, 236);
+
+}
+.resume_form input:focus{
+    /* color: aqua; */
+}
+
+
+
+
+
+/* //==============        material ui */
+/* h1{
+    font-size: 2rem;
+} */
