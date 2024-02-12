@@ -1,14 +1,8 @@
-import axios from "axios";
-import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { setUser } from "../components/UserSlice";
-import { Box, Button, Divider, FormControl, FormControlLabel, FormLabel, InputAdornment, TextField, Typography } from "@mui/material";
+import { Box, Button, Divider, FormControl, FormLabel, TextField } from "@mui/material";
 import styled from "@emotion/styled";
 import GoogleIcon from '@mui/icons-material/Google';
-import PersonIcon from '@mui/icons-material/Person';
 import { GoogleLogin } from '@react-oauth/google';
-import { Password } from "@mui/icons-material";
 // import {jwtDecode}  from "jwt-decode";
 const  {jwtDecode} = require('jwt-decode')
 

@@ -4,32 +4,25 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Home from './components/Home';
 import Error from './auth/error';
 import Login from './auth/Login';
-import Dashboard from './components/Dashboard';
 import Navbar from './components/Navbar';
-import Logout from './auth/Logout';
-import Success from './components/Success';
 import Resume from './components/Resume';
-
-
+import FormDashboard from './components/Dashboard';
 
 function App() {
-  const router = createBrowserRouter([{
-    path: '/',
-    element: <Navbar/>,
-    errorElement: <Error/>,
-    children: [
-      // { path: '', element: <Login /> },
-      { index: true, element: <Home/>},
-      {path:'login', element: <Login/>},
-      {path: "dashboard", element: <Success/>},
-      // {path: "login/success", element: <Dashboard/>},
-
-      // { path: "logout", element: <Logout/> },
-      { path: "resumepreview", element: <Resume/>}
-    ]
-    }
-])
-
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <Navbar />,
+      errorElement: <Error />,
+      children: [
+        { index: true, element: <Home /> },
+        { path: 'login', element: <Login /> },
+        { path: 'dashboard', element: <FormDashboard /> },
+        // { path: "logout", element: <Logout/> },
+        { path: 'resumepreview', element: <Resume /> },
+      ],
+    },
+  ]);
 
   return (
     <div>

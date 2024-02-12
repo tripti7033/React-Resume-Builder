@@ -14,8 +14,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import HomeIcon from '@mui/icons-material/Home';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import {useReactToPrint} from 'react-to-print'
+import { useReactToPrint } from 'react-to-print';
 
 interface UserState {
   email: string;
@@ -25,7 +24,6 @@ interface UserState {
 }
 const Resume = () => {
   const { userid } = useSelector((state: { user: UserState }) => state.user);
-
 
   const [userData, setUserData] = useState({
     image: '',
@@ -87,16 +85,14 @@ const Resume = () => {
   }, [userid]);
   // console.log(userData);
 
-
   const downloadRef = useRef(null);
   const handlePrint = useReactToPrint({
-    content: () => downloadRef.current
-  })
-  
+    content: () => downloadRef.current,
+  });
 
   return (
     <Box display={'flex'}>
-      <Box display={'flex'} justifyContent={'center'} ref = {downloadRef}>
+      <Box display={'flex'} justifyContent={'center'} ref={downloadRef}>
         <Paper
           elevation={3}
           sx={{
@@ -152,7 +148,6 @@ const Resume = () => {
                 item
                 md={5}
                 xs={6}
-
                 //   sx={{ backgroundColor: "purple" }}
               >
                 <Box>
@@ -264,7 +259,7 @@ const Resume = () => {
                         <Typography>Hobbies : </Typography>
                         <Typography>Language : </Typography>
                       </Grid>
-                      <Grid item  md={6}>
+                      <Grid item md={6}>
                         <Typography>{userData.nationality}</Typography>
                         <Typography> {userData.gender}</Typography>
                         <Typography> {userData.dateOfBirth}</Typography>
@@ -391,7 +386,9 @@ const Resume = () => {
         </Paper>
       </Box>
       <Box margin={2}>
-        <Button onClick={handlePrint} variant="contained">Download</Button>
+        <Button onClick={handlePrint} variant="contained">
+          Download
+        </Button>
       </Box>
     </Box>
   );
