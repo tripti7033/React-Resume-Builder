@@ -7,5 +7,4 @@ export const postLoginData = async (req: Request, res: Response) =>{
 
     const userRepo = AppDataSouece.getRepository(User);
     const userData = await userRepo.find();
-
 }

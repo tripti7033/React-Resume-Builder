@@ -9,10 +9,14 @@ import { User } from "../entity/user";
 
 export const postFormData = async (req: Request, res: Response) => {
     const id = req.params.userid;
+    console.log("server id", id);
+    
     try{
     const {
         name,
+        designation,
         email,
+        gitHub,
         phoneNumber,
         address,
         pinCode,
@@ -20,11 +24,14 @@ export const postFormData = async (req: Request, res: Response) => {
         gender,
         nationality,
         hobbies,
+        language,
+        objective,
         course,
         collegeName,
         universityName,
         grade,
         yearOfPassing,
+        yearOfStarting,
         skill1,
         description1,
         skill2,
@@ -49,7 +56,9 @@ export const postFormData = async (req: Request, res: Response) => {
     const personalRepo = AppDataSouece.getRepository(PersonalDetails);
     const personalData = personalRepo.create({
         name: name,
+        designation: designation,
         email: email,
+        gitHub: gitHub,
         phoneNumber: phoneNumber,
         address: address,
         pincode: pinCode,
@@ -57,6 +66,8 @@ export const postFormData = async (req: Request, res: Response) => {
         gender: gender,
         nationality: nationality,
         hobbies: hobbies,
+        language: language,
+        objective: objective,
         user: user,
        
     })
@@ -69,6 +80,7 @@ export const postFormData = async (req: Request, res: Response) => {
         univerSityName: universityName,
         grade: grade,
         yearOfPassing: yearOfPassing,
+        yearOfStarting: yearOfStarting,
         user: user,
     })
     await educationRepo.save(educationData);
@@ -113,26 +125,13 @@ export const getPostData = async (req: Request, res: Response) => {
     const id = req.params.userid;
     const formRepo = AppDataSouece.getRepository(User);
     const AllPersonalDetail = await formRepo.find({ relations: {
+        person: true,
         educationDetails: true,
         projects: true,
         skills: true,
-        person: true,
     },});
-    
-    // const personalRepo = AppDataSouece.getRepository(PersonalDetails);
-    // const personal_details = await personalRepo.find();
-
-    // const educationRepo = AppDataSouece.getRepository(EducationDetails);
-    // const education_details = await educationRepo.find();
-
-    // const projectsRepo = AppDataSouece.getRepository(Project);
-    // const project_Details = await projectsRepo.find();
-
-    // const skillsRepo = AppDataSouece.getRepository(Skills)
-    // const skill_Detail = await skillsRepo.find()
-
-
-
+  console.log("res");
+  
     return res.json(AllPersonalDetail);
 
 }

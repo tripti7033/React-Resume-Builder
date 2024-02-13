@@ -1,32 +1,23 @@
-import { useDispatch, useSelector } from "react-redux";
 import { Box, Button, Divider, FormControl, FormLabel, TextField } from "@mui/material";
 import styled from "@emotion/styled";
 import GoogleIcon from '@mui/icons-material/Google';
-import { GoogleLogin } from '@react-oauth/google';
+// import { GoogleLogin } from '@react-oauth/google';
 // import {jwtDecode}  from "jwt-decode";
-const  {jwtDecode} = require('jwt-decode')
+// const  {jwtDecode} = require('jwt-decode')
 
 // interface for Userstate
-interface UserState {
-  email: string;
-  userid: string;
-  image: string;
-  isLoggedin: boolean;
-}
 
 const Login = () => {
-  const { email, userid, image, isLoggedin } = useSelector((state: {user: UserState}) => state.user);
-  const dispatch = useDispatch();
-  // const [isA , setisA] = useState(false)
+
   const loginWithGoogle = async () => {
     window.open("http://localhost:6005/auth/google/callback", "_self");
-   
-
   };
+
+
+
   const CustomFormControl=styled(FormControl)({
     width:"100%",
-    // marginBottom:"10px",
-
+   
     "& input":{
       padding:"5px !important"
 
@@ -38,14 +29,6 @@ const Login = () => {
     width:"100%"
 
   })
-
-  const handleClick = (credentialResponseDecode: any) => {
-   const {name, email, picture} = credentialResponseDecode
-   console.log(name, email, picture);
-
-   
-  }
-  
   return (
    
     
@@ -68,7 +51,7 @@ const Login = () => {
 
 
 {/* //============================ */}
-
+{/* 
 <GoogleLogin
   onSuccess={(credentialResponse) => {
     let credentialResponseDecode =  jwtDecode(credentialResponse?.credential)
@@ -79,7 +62,7 @@ const Login = () => {
     console.log('Login Failed');
   }}
 />
-
+ */}
 
     </Box>
   

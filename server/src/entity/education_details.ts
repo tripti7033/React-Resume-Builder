@@ -21,6 +21,9 @@ export class EducationDetails {
     @Column()
     yearOfPassing: string
 
+    @Column()
+    yearOfStarting: string
+
     @ManyToOne(() => User, (user) => user.educationDetails)
     user: User
 

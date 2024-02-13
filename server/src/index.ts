@@ -6,6 +6,7 @@ import { User } from './entity/user';
 const cors = require('cors');
 
 const session = require('express-session');
+import { SessionData }  from "express-session"
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
@@ -32,9 +33,11 @@ interface UserI{
 interface CustomRequest extends Request {
   user?: any;
 }
-interface CustomRequestt extends Request {
-  logout: ()=> void; 
+
+interface MySessionData extends SessionData {
+  google_oauth2_state?: string;
 }
+
 app.use(cors({
   origin: 'http://localhost:3000', // Replace with your client's origin
   credentials: true,
@@ -65,7 +68,7 @@ app.use(personal_details)
 
 
 
-console.log("girst");
+// console.log("first");
 
 passport.use(
     new GoogleStrategy({
@@ -73,11 +76,11 @@ passport.use(
         clientSecret: GOOGLE_CLIENT_SECRET,
         callbackURL: "/auth/google/callback",
         scope: ['profile', 'email'],
-    },
-
-    async (accessatoken: string, refreshToken: string, profile: any, done:any) => {
+    },  async (accessatoken: string, refreshToken: string, profile: any, done:any) => {
         console.log(profile);
         console.log(profile.emails[0].value);
+        console.log("id", profile.id);
+        
         
         try{
           const userRepo = AppDataSouece.getRepository(User);
@@ -101,37 +104,40 @@ passport.use(
     }
     )
 )
-console.log("sec");
 
-passport.serializeUser((userData: any, done:any)=>{
-    done(null, userData.id)
+passport.serializeUser((user: any, done:any)=>{
+  console.log("user", user);
+    done(null, user)
 })
-passport.deserializeUser((userData: any, done:any)=>{
-    done(null, userData)
+passport.deserializeUser((user: any, done:any)=>{
+    done(null, user) //decode session token
 })
 
 app.get('/auth/google',
-  passport.authenticate('google', { scope: ['profile', 'email'] }));
+  passport.authenticate('google', {
+     scope: ['profile', 'email'],
+     prompt: 'select_account consent', 
+    //  state: true,
+    }
+    ));
 
 app.get('/auth/google/callback', 
   passport.authenticate('google', { 
     successRedirect: 'http://localhost:3000/dashboard',
     failureRedirect: 'http://localhost:3000/login',
+   
 }),
-// function(req: Request, res) {
-  
-//     res.redirect('http://localhost:3000/dashboard');
-// }
-
  );
  
+ console.log('before login');
  
   app.get("/login", async (req: CustomRequest, res: Response)=>{
-   console.log("rewwwwwwwww",req.user);
-
    if(req.user){
+  
+    console.log("dfghj",req.user);
+    
     try {
-      const userId = req.user;
+      const userId = req.user.id;
       console.log("id", userId);
       
       const userRepo = AppDataSouece.getRepository(User);
@@ -154,10 +160,19 @@ app.get('/auth/google/callback',
 
    }
  })
-// app.get('/logout', (req: Request, res: Response)=>{
-//   // req.logout()
-//   res.redirect('/');
-// } )
+ app.get('/logout', (req: Request, res: Response, next)=>{
+  req.logout(function(err){
+    if(err){
+      return next(err)
+    }
+    res.redirect('http://localhost:3000');
+    // req.session.destroy(() => {
+    //   res.redirect('http://localhost:3000');
+    // });
+  })
+ 
+  
+} )
 
 
 

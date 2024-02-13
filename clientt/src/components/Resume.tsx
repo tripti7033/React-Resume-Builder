@@ -5,6 +5,7 @@ import {
   Grid,
   IconButton,
   Paper,
+  ThemeProvider,
   Typography,
 } from '@mui/material';
 import React, { useEffect, useState, useRef } from 'react';
@@ -15,6 +16,14 @@ import HomeIcon from '@mui/icons-material/Home';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { useReactToPrint } from 'react-to-print';
+import { MainTheme } from '../MainTheme';
+import ContactMailIcon from '@mui/icons-material/ContactMail';
+import SchoolIcon from '@mui/icons-material/School';
+import ArchitectureIcon from '@mui/icons-material/Architecture';
+import AddBoxIcon from '@mui/icons-material/AddBox';
+import AdsClickIcon from '@mui/icons-material/AdsClick';
+import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 
 interface UserState {
   email: string;
@@ -24,11 +33,14 @@ interface UserState {
 }
 const Resume = () => {
   const { userid } = useSelector((state: { user: UserState }) => state.user);
+// console.log(userid);
 
   const [userData, setUserData] = useState({
     image: '',
     name: '',
+    designation: '',
     email: '',
+    gitHub: '',
     phoneNumber: '',
     address: '',
     pinCode: '',
@@ -36,9 +48,12 @@ const Resume = () => {
     gender: '',
     nationality: '',
     hobbies: '',
+    language: '',
+    objective: '',
     course: '',
     collegeName: '',
     universityName: '',
+    yearOfStarting: '',
     yearOfPassing: '',
     grade: '',
     skill1: '',
@@ -51,39 +66,55 @@ const Resume = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios(
-        `http://localhost:6005/users/${userid}/preview`
-      );
-      console.log(response.data[0]);
-      const result = await response.data[0];
-      setUserData((prevstate) => ({
-        ...prevstate,
-        image: result.image,
-        name: result.person.name,
-        email: result.person.email,
-        phoneNumber: result.person.phoneNumber,
-        address: result.person.address,
-        pinCode: result.person.pincode,
-        dateOfBirth: result.person.dateOfBirth,
-        gender: result.person.gender,
-        nationality: result.person.nationality,
-        hobbies: result.person.hobbies,
-        course: result.educationDetails[0].course,
-        collegeName: result.educationDetails[0].collegeName,
-        universityName: result.educationDetails[0].univerSityName,
-        yearOfPassing: result.educationDetails[0].yearOfPassing,
-        grade: result.educationDetails[0].grade,
-        skill1: result.skills[0].skill1,
-        description1: result.skills[0].description1,
-        skill2: result.skills[0].skill2,
-        description2: result.skills[0].description2,
-        title: result.projects[0].title,
-        description: result.projects[0].description,
-      }));
-    };
+      try{
+        const response = await axios.get(
+          `http://localhost:6005/users/2/preview`
+        );
+        
+        const id = parseInt(userid) -1;
+        // console.log(response.data[id]);
+        const result = response.data[id];
+        console.log(result);
+        console.log(result.image, "dfghbjnkml");
+        
+        
+        setUserData((prevstate) => ({
+          ...prevstate,
+          image: result.image,
+          name: result.person.name,
+          designation: result.person.designation,
+          email: result.person.email,
+          gitHub: result.person.gitHub,
+          phoneNumber: result.person.phoneNumber,
+          address: result.person.address,
+          pinCode: result.person.pincode,
+          dateOfBirth: result.person.dateOfBirth,
+          gender: result.person.gender,
+          nationality: result.person.nationality,
+          hobbies: result.person.hobbies,
+          language: result.person.language,
+          objective: result.person.objective,
+          course: result.educationDetails[0].course,
+          collegeName: result.educationDetails[0].collegeName,
+          universityName: result.educationDetails[0].univerSityName,
+          yearOfStarting: result.educationDetails[0].yearOfStarting,
+          yearOfPassing: result.educationDetails[0].yearOfPassing,
+          grade: result.educationDetails[0].grade,
+          skill1: result.skills[0].skill1,
+          description1: result.skills[0].description1,
+          skill2: result.skills[0].skill2,
+          description2: result.skills[0].description2,
+          title: result.projects[0].title,
+          description: result.projects[0].description,
+        }));
+        
+      } catch (err){
+        
+      }
+    }
     fetchData();
   }, [userid]);
-  // console.log(userData);
+  console.log(userData);
 
   const downloadRef = useRef(null);
   const handlePrint = useReactToPrint({
@@ -91,7 +122,8 @@ const Resume = () => {
   });
 
   return (
-    <Box display={'flex'}>
+  <ThemeProvider theme={MainTheme}>
+      <Box display={'flex'}>
       <Box display={'flex'} justifyContent={'center'} ref={downloadRef}>
         <Paper
           elevation={3}
@@ -103,63 +135,60 @@ const Resume = () => {
           }}
         >
           <Box
-            height={120}
+            height={150}
             display={'flex'}
             flexDirection={'column'}
-            borderBottom={'1px solid rgba(0,0,0,0.5)'}
+            borderBottom={'1px solid rgba(25, 179, 238, 0.8)'}
+            sx={{background: "rgba(25, 179, 238, 0.5)"}}
           >
-            <Box display={'flex'} justifyContent={'space-around'}>
+            <Box display={'flex'} justifyContent={'space-around'} >
               <Box display={'flex'}>
                 <IconButton>
                   <Avatar
                     sx={{
-                      height: '100px',
-                      width: ' 100px',
+                      height: '130px',
+                      width: ' 130px',
                     }}
                     alt={userData.name}
                     src={userData.image}
                   />
                 </IconButton>
               </Box>
-              <Box>
-                <Typography variant="h2" textAlign={'center'}>
+              <Box 
+              // display={"flex"}  flexDirection={"column"} justifyContent={"center"} alignItems={"center"}
+              >
+                <Typography variant="h2" >
                   {userData.name}
                 </Typography>
-                <Typography variant="h5" textAlign={'center'}>
-                  Full Stack developer
+                <Typography variant="h5">
+                  {userData.designation}
                 </Typography>
               </Box>
             </Box>
           </Box>
           {/* <hr/> */}
           <Box
-            // border={'1px solid green'}
             overflow="auto"
+            padding={2}
           >
             <Grid
               container
-              spacing={5}
+              spacing={12}
               sx={{
-                padding: '10px',
+                paddingLeft: "10px",
                 height: '100%',
               }}
             >
               <Grid
                 item
-                md={5}
+                md={4}
                 xs={6}
-                //   sx={{ backgroundColor: "purple" }}
-              >
+               >
                 <Box>
                   <Typography
-                    variant="h6"
-                    borderBottom={'1px solid black'}
-                    sx={{
-                      paddingLeft: '20px',
-                      fontWeight: '700',
-                    }}
-                  >
-                    Contact
+                    variant="h6">
+                    <ContactMailIcon/>
+                    Contact     
                   </Typography>
                   <Box paddingLeft={2} paddingTop={1}>
                     <Typography
@@ -190,7 +219,7 @@ const Resume = () => {
                       }}
                     >
                       <GitHubIcon />
-                      GitHub
+                      {userData.gitHub}
                       {/* {userData.github} */}
                     </Typography>
                     <Typography
@@ -208,13 +237,8 @@ const Resume = () => {
                 <Box>
                   <Typography
                     variant="h6"
-                    borderBottom={'1px solid black'}
-                    sx={{
-                      paddingTop: '30px',
-                      paddingLeft: '20px',
-                      fontWeight: '700',
-                    }}
                   >
+                    <ManageAccountsIcon/>
                     Skill
                   </Typography>
                   <Box paddingLeft={3} paddingTop={1}>
@@ -241,13 +265,8 @@ const Resume = () => {
                 <Box>
                   <Typography
                     variant="h6"
-                    borderBottom={'1px solid black'}
-                    sx={{
-                      paddingTop: '30px',
-                      paddingLeft: '20px',
-                      fontWeight: '700',
-                    }}
                   >
+                    <AddBoxIcon/>
                     Others
                   </Typography>
                   <Box paddingLeft={3} paddingTop={1}>
@@ -264,21 +283,17 @@ const Resume = () => {
                         <Typography> {userData.gender}</Typography>
                         <Typography> {userData.dateOfBirth}</Typography>
                         <Typography> {userData.hobbies}</Typography>
+                        <Typography> {userData.language}</Typography>
                       </Grid>
                     </Grid>
                   </Box>
                 </Box>
               </Grid>
-              <Grid item xs={6} md={6}>
+              <Grid item xs={6} md={8}>
                 <Box>
                   <Typography
-                    variant="h6"
-                    borderBottom={'1px solid black'}
-                    sx={{
-                      paddingLeft: '30px',
-                      fontWeight: '700',
-                    }}
-                  >
+                    variant="h6">
+                    <AdsClickIcon/>
                     Objective
                   </Typography>
                   <Box
@@ -288,21 +303,16 @@ const Resume = () => {
                     }}
                   >
                     <Typography>
-                      A highly organized and hard-working individual looking for
-                      a responsible position to gain practical experience.
+                      {/* A highly organized and hard-working individual looking for
+                      a responsible position to gain practical experience. */}
+                      {userData.objective}
                     </Typography>
                   </Box>
                 </Box>
                 <Box>
                   <Typography
-                    variant="h6"
-                    borderBottom={'1px solid black'}
-                    sx={{
-                      paddingTop: '30px',
-                      paddingLeft: '30px',
-                      fontWeight: '700',
-                    }}
-                  >
+                    variant="h6">
+                    <SchoolIcon/>
                     Education
                   </Typography>
                   <Box
@@ -318,7 +328,7 @@ const Resume = () => {
                     </Typography>
                     <Typography>grade: {userData.grade}</Typography>
                     <Typography>
-                      yearOfPassing: {userData.yearOfPassing}
+                      Session: {userData.yearOfPassing} - {userData.yearOfStarting}
                     </Typography>
                   </Box>
                   <Box></Box>
@@ -326,13 +336,8 @@ const Resume = () => {
                 <Box>
                   <Typography
                     variant="h6"
-                    borderBottom={'1px solid black'}
-                    sx={{
-                      paddingTop: '30px',
-                      paddingLeft: '30px',
-                      fontWeight: '700',
-                    }}
                   >
+                    <ArchitectureIcon/>
                     Projects
                   </Typography>
                   <Box
@@ -350,13 +355,8 @@ const Resume = () => {
                 <Box paddingTop={1}>
                   <Typography
                     variant="h6"
-                    borderBottom={'1px solid black'}
-                    sx={{
-                      paddingTop: '30px',
-                      paddingLeft: '20px',
-                      fontWeight: '700',
-                    }}
                   >
+                    <DriveFileRenameOutlineIcon/>
                     Declaration
                   </Typography>
                   <Box
@@ -391,6 +391,7 @@ const Resume = () => {
         </Button>
       </Box>
     </Box>
+  </ThemeProvider>
   );
 };
 

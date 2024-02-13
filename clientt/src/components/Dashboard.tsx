@@ -13,7 +13,6 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { Dashboard } from '@mui/icons-material';
 
 
 interface UserState {
@@ -25,10 +24,15 @@ interface UserState {
 const FormDashboard: React.FC = () => {
   // const userid=4;
   const {userid} = useSelector((state: {user: UserState} ) => state.user)
-  let goto = useNavigate()
+  console.log(userid, 'userId');
+  
+  let goto = useNavigate();
+  
   const [userData, setUserData] = useState({
     name: '',
+    designation: '',
     email: '',
+    gitHub: '',
     phoneNumber: '',
     address: '',
     pinCode: '',
@@ -36,9 +40,12 @@ const FormDashboard: React.FC = () => {
     gender: '',
     nationality: '',
     hobbies: '',
+    language: '',
+    objective: '',
     course: '',
     collegeName: '',
     universityName: '',
+    yearOfStarting: '',
     yearOfPassing: '',
     grade: '',
     skill1: '',
@@ -55,10 +62,13 @@ const FormDashboard: React.FC = () => {
       [name]: value,
     }));
   };
+console.log(userid, "fcgvhbjkml");
 
-  console.log(userData)
+  // console.log(userData)
   const handleSubmit =async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(userid, "tripti");
+    
     try{
       const response = await axios.post(`http://localhost:6005/users/${userid}/preview`,
       JSON.stringify(userData),
@@ -68,7 +78,7 @@ const FormDashboard: React.FC = () => {
         }
       }
       )
-      console.log(response.data);
+      // console.log(response.data);
 
     }catch(err){
       console.log(err);
@@ -99,7 +109,7 @@ const FormDashboard: React.FC = () => {
                 }}
               >
                 <Grid container spacing={2}>
-                  <Grid item xs={6} md={6} rowSpacing={2}>
+                  <Grid item xs={12} md={6} rowSpacing={2}>
                     <TextField
                       type="text"
                       label="name"
@@ -109,7 +119,17 @@ const FormDashboard: React.FC = () => {
                       onChange={handleSubmitChange}
                     />
                   </Grid>
-                  <Grid item xs={6} md={6} rowSpacing={2}>
+                  <Grid item xs={12} md={6} rowSpacing={2}>
+                    <TextField
+                      type="text"
+                      label="Job Designation"
+                      variant="filled"
+                      name="designation"
+                      value={userData.designation}
+                      onChange={handleSubmitChange}
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={6} rowSpacing={2}>
                     <TextField
                       type="email"
                       label="Email id"
@@ -119,8 +139,18 @@ const FormDashboard: React.FC = () => {
                       onChange={handleSubmitChange}
                     />
                   </Grid>
+                  <Grid item xs={12} md={6} rowSpacing={2}>
+                    <TextField
+                      type="text"
+                      label="GitHub id"
+                      variant="filled"
+                      name="gitHub"
+                      value={userData.gitHub}
+                      onChange={handleSubmitChange}
+                    />
+                  </Grid>
 
-                  <Grid item xs={6} md={6}>
+                  <Grid item xs={12} md={6}>
                     <TextField
                       type="number"
                       label="Phone Number"
@@ -130,7 +160,7 @@ const FormDashboard: React.FC = () => {
                       onChange={handleSubmitChange}
                     />
                   </Grid>
-                  <Grid item xs={6} md={6}>
+                  <Grid item xs={12} md={6}>
                     <TextField
                       type="text"
                       label="Address"
@@ -141,7 +171,7 @@ const FormDashboard: React.FC = () => {
                     />
                   </Grid>
 
-                  <Grid item xs={6} md={6}>
+                  <Grid item xs={12} md={6}>
                     <TextField
                       type="number"
                       label="Pin Code"
@@ -151,19 +181,21 @@ const FormDashboard: React.FC = () => {
                       onChange={handleSubmitChange}
                     />
                   </Grid>
-                  <Grid item xs={6} md={6}>
+                  <Grid item xs={12} md={6}>
+                    {/* <DatePicker/> */}
                     <TextField
                       type="date"
                       label="Date of Birth"
                       variant="filled"
                       name="dateOfBirth"
-                      placeholder=""
+                    
+                  
                       value={userData.dateOfBirth}
                       onChange={handleSubmitChange}
                     />
                   </Grid>
 
-                  <Grid item xs={6} md={6}>
+                  <Grid item xs={12} md={6}>
                     <TextField
                       type="text"
                       label="Gender"
@@ -173,7 +205,7 @@ const FormDashboard: React.FC = () => {
                       onChange={handleSubmitChange}
                     />
                   </Grid>
-                  <Grid item xs={6} md={6}>
+                  <Grid item xs={12} md={6}>
                     <TextField
                       type="text"
                       label="Nationality"
@@ -183,13 +215,35 @@ const FormDashboard: React.FC = () => {
                       onChange={handleSubmitChange}
                     />
                   </Grid>
-                  <Grid item xs={6} md={6}>
+                  <Grid item xs={12} md={6}>
                     <TextField
                       type="text"
                       label="Hobbies"
                       variant="filled"
                       name="hobbies"
                       value={userData.hobbies}
+                      onChange={handleSubmitChange}
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    <TextField
+                      type="text"
+                      label="language"
+                      variant="filled"
+                      name="language"
+                      value={userData.language}
+                      onChange={handleSubmitChange}
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    <TextField
+                      type="text"
+                      label="carrer objective"
+                      variant="filled"
+                      name="objective"
+                      multiline={true}
+                      rows={3}
+                      value={userData.objective}
                       onChange={handleSubmitChange}
                     />
                   </Grid>
@@ -216,7 +270,7 @@ const FormDashboard: React.FC = () => {
                 }}
               >
                 <Grid container spacing={2}>
-                  <Grid item xs={6} md={6} rowSpacing={2}>
+                  <Grid item xs={12} md={6} rowSpacing={2}>
                     <TextField
                       type="text"
                       label="Course"
@@ -226,7 +280,7 @@ const FormDashboard: React.FC = () => {
                       onChange={handleSubmitChange}
                     />
                   </Grid>
-                  <Grid item xs={6} md={6} rowSpacing={2}>
+                  <Grid item xs={12} md={6} rowSpacing={2}>
                     <TextField
                       type="text"
                       label="College Name"
@@ -237,7 +291,7 @@ const FormDashboard: React.FC = () => {
                     />
                   </Grid>
 
-                  <Grid item xs={6} md={6}>
+                  <Grid item xs={12} md={6}>
                     <TextField
                       type="text"
                       label="University Name"
@@ -247,7 +301,7 @@ const FormDashboard: React.FC = () => {
                       onChange={handleSubmitChange}
                     />
                   </Grid>
-                  <Grid item xs={6} md={6}>
+                  <Grid item xs={12} md={6}>
                     <TextField
                       type="text"
                       label="Grade"
@@ -257,8 +311,18 @@ const FormDashboard: React.FC = () => {
                       onChange={handleSubmitChange}
                     />
                   </Grid>
-
-                  <Grid item xs={6} md={6}>
+                  <Grid item xs={12} md={6}>
+                    <TextField
+                      type="text"
+                      label="Year Of starting"
+                      variant="filled"
+                      name="yearOfStarting"
+                      value={userData.yearOfStarting}
+                      
+                      onChange={handleSubmitChange}
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={6}>
                     <TextField
                       type="text"
                       label="Year Of Passing"
@@ -340,7 +404,7 @@ const FormDashboard: React.FC = () => {
                 sx={{ '& .MuiTextField-root': { m: 2, width: '30rem' } }}
               >
                 <Grid container spacing={2}>
-                  <Grid item xs={6} md={6}>
+                  <Grid item xs={12} md={6}>
                     <TextField
                       type="text"
                       label="Skill 1"
@@ -350,7 +414,7 @@ const FormDashboard: React.FC = () => {
                       onChange={handleSubmitChange}
                     />
                   </Grid>
-                  <Grid item xs={6} md={6}>
+                  <Grid item xs={12} md={6}>
                     <TextField
                       type="text"
                       label="description"
@@ -360,7 +424,7 @@ const FormDashboard: React.FC = () => {
                       onChange={handleSubmitChange}
                     />
                   </Grid>
-                  <Grid item xs={6} md={6}>
+                  <Grid item xs={12} md={6}>
                     <TextField
                       type="text"
                       label="Skill 2"
@@ -370,7 +434,7 @@ const FormDashboard: React.FC = () => {
                       onChange={handleSubmitChange}
                     />
                   </Grid>
-                  <Grid item xs={6} md={6}>
+                  <Grid item xs={12} md={6}>
                     <TextField
                       type="text"
                       label="description"

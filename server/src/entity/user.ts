@@ -27,7 +27,7 @@ export class User {
     @UpdateDateColumn()
     updated_at: Date
 
-    @OneToOne(()=>PersonalDetails)
+    @OneToOne(()=>PersonalDetails, person => person.user)
     @JoinColumn()
     person: PersonalDetails
 

@@ -22,39 +22,52 @@ interface UserState {
   isLoggedin: boolean;
 }
 const Header = () => {
-  const goto = useNavigate();
-  const { email, image, isLoggedin } = useSelector(
+  // const goto = useNavigate();
+  const { email, image, } = useSelector(
     (state: { user: UserState }) => state.user
   );
   const dispatch = useDispatch();
 
-  const getuser = useCallback(async () => {
-    const response = await axios.get('http://localhost:6005/login', {
-      withCredentials: true,
-    });
-    // console.log('ok');
-
-    console.log(response.data);
-
-    const data = response.data.user[0];
-
-    const userData = {
-      email: data.email,
-      userid: data.id,
-      image: data.image,
-      isLoggedin: true,
-    };
-
-    dispatch(setUser(userData));
-  }, [dispatch]);
+  
   useEffect(() => {
+    const getuser = async() => {
+      try{
+         const response = await axios.get('http://localhost:6005/login', {
+          withCredentials: true,
+        });
+        // console.log('ok');
+    
+        console.log(response.data.user[0]);
+    
+        const data = response.data.user[0];
+    
+        const userData = {
+          email: data.email,
+          userid: data.id,
+          image: data.image,
+          isLoggedin: true,
+        };
+    
+        console.log(userData);
+        dispatch(setUser(userData));
+      } catch(err){
+        console.log(err);  
+      }
+    }
+
+
     getuser();
-  }, [getuser]);
+  }, []);
+  
 
   const handleLogout = () => {
+    window.open("http://localhost:6005/logout", "_self");
     dispatch(clearUser());
-    goto('/');
+    // goto('/');
   };
+  
+  console.log(image);
+  
 
   return (
     <AppBar position="static" sx={{ background: ' rgb(197, 241, 241)' }}>
@@ -102,10 +115,10 @@ const Header = () => {
                 Logout
               </Button>
               <IconButton
-                //  onClick={handleOpenUserMenu}
                 sx={{ p: 0 }}
               >
-                <Avatar alt="Remy Sharp" src={image} />
+                {/* {image} */}
+                <Avatar src={image} />
               </IconButton>
             </Box>
           )}

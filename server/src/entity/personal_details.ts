@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, IntegerType, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { User } from "./user";
 
 @Entity()
@@ -10,10 +10,16 @@ export class PersonalDetails {
     name: string;
 
     @Column()
+    designation: string;
+
+    @Column()
     email: string;
 
     @Column()
-    phoneNumber: number;
+    gitHub: string;
+
+    @Column()
+    phoneNumber: string;
 
     @Column()
     address: string;
@@ -21,7 +27,7 @@ export class PersonalDetails {
     @Column()
     pincode: number;
 
-    @Column()
+    @Column({type: 'date'})
     dateOfBirth: Date;
 
     @Column()
@@ -32,9 +38,15 @@ export class PersonalDetails {
 
     @Column()
     hobbies: string
+
+    @Column()
+    language: string
+
+    @Column()
+    objective: string
    
-    @OneToOne(()=>User)
-    @JoinColumn()
+    @OneToOne(()=>User, user => user.person )
+    
     user: User
    
 }
