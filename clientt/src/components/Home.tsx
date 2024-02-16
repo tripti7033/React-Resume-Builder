@@ -15,14 +15,17 @@ const Home = () => {
   );
   return (
     <Box
+    
       sx={{
-        height: '90vh',
+        height: "calc(100vh - 64px)",
         background: ' rgb(250, 234, 214)',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column',
         gap: '4rem',
+        marginTop:"64px",
+    
       }}
     >
       <Box>

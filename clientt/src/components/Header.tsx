@@ -70,7 +70,7 @@ const Header = () => {
   
 
   return (
-    <AppBar position="static" sx={{ background: ' rgb(197, 241, 241)' }}>
+    <AppBar sx={{ background: ' rgb(197, 241, 241)' }} elevation={0}>
       <Toolbar sx={{ mx: 4, display: 'flex', justifyContent: 'space-between' }}>
         <Box
           display={'flex'}

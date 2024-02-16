@@ -71,41 +71,43 @@ const Resume = () => {
           `http://localhost:6005/users/2/preview`
         );
         
-        const id = parseInt(userid) -1;
-        // console.log(response.data[id]);
+        const id= parseInt(userid)-2
+        // const dataArray = response.data
+        // const id = dataArray.length -1;
+        console.log(id, "data");
         const result = response.data[id];
-        console.log(result);
-        console.log(result.image, "dfghbjnkml");
+        // console.log(result);
+        // console.log(result.image);
         
         
         setUserData((prevstate) => ({
           ...prevstate,
-          image: result.image,
-          name: result.person.name,
-          designation: result.person.designation,
-          email: result.person.email,
-          gitHub: result.person.gitHub,
-          phoneNumber: result.person.phoneNumber,
-          address: result.person.address,
-          pinCode: result.person.pincode,
-          dateOfBirth: result.person.dateOfBirth,
-          gender: result.person.gender,
-          nationality: result.person.nationality,
-          hobbies: result.person.hobbies,
-          language: result.person.language,
-          objective: result.person.objective,
-          course: result.educationDetails[0].course,
-          collegeName: result.educationDetails[0].collegeName,
-          universityName: result.educationDetails[0].univerSityName,
-          yearOfStarting: result.educationDetails[0].yearOfStarting,
-          yearOfPassing: result.educationDetails[0].yearOfPassing,
-          grade: result.educationDetails[0].grade,
-          skill1: result.skills[0].skill1,
-          description1: result.skills[0].description1,
-          skill2: result.skills[0].skill2,
-          description2: result.skills[0].description2,
-          title: result.projects[0].title,
-          description: result.projects[0].description,
+          image: result?.image,
+          name: result?.person?.name,
+          designation: result?.person?.designation,
+          email: result?.person?.email,
+          gitHub: result?.person?.gitHub,
+          phoneNumber: result?.person?.phoneNumber,
+          address: result?.person?.address,
+          pinCode: result?.person?.pincode,
+          dateOfBirth: result?.person?.dateOfBirth,
+          gender: result?.person?.gender,
+          nationality: result?.person?.nationality,
+          hobbies: result?.person?.hobbies,
+          language: result?.person?.language,
+          objective: result?.person?.objective,
+          course: result?.educationDetails[0]?.course,
+          collegeName: result?.educationDetails[0]?.collegeName,
+          universityName: result?.educationDetails[0]?.univerSityName,
+          yearOfStarting: result?.educationDetails[0]?.yearOfStarting,
+          yearOfPassing: result?.educationDetails[0]?.yearOfPassing,
+          grade: result?.educationDetails[0]?.grade,
+          skill1: result?.skills[0]?.skill1,
+          description1: result?.skills[0]?.description1,
+          skill2: result?.skills[0]?.skill2,
+          description2: result?.skills[0]?.description2,
+          title: result?.projects[0]?.title,
+          description: result?.projects[0]?.description,
         }));
         
       } catch (err){
@@ -114,7 +116,7 @@ const Resume = () => {
     }
     fetchData();
   }, [userid]);
-  console.log(userData);
+  // console.log(userData);
 
   const downloadRef = useRef(null);
   const handlePrint = useReactToPrint({
@@ -123,15 +125,19 @@ const Resume = () => {
 
   return (
   <ThemeProvider theme={MainTheme}>
-      <Box display={'flex'}>
-      <Box display={'flex'} justifyContent={'center'} ref={downloadRef}>
+      <Box display={'flex'} justifyContent={"center"} marginTop={"100px"}>
+      {/* <Box  */}
+      {/* // display={'flex'} justifyContent={'center'}  */}
+      
+      {/* > */}
         <Paper
           elevation={3}
+          ref={downloadRef}
           sx={{
-            height: '900px',
-            width: '90%',
-            marginTop: '15px',
-            marginLeft: '10px',
+            height: '1054px',
+            width: '815px',
+            // marginTop: '15px',
+            // marginLeft: '10px',
           }}
         >
           <Box
@@ -142,7 +148,7 @@ const Resume = () => {
             sx={{background: "rgba(25, 179, 238, 0.5)"}}
           >
             <Box display={'flex'} justifyContent={'space-around'} >
-              <Box display={'flex'}>
+              {/* <Box display={'flex'}> */}
                 <IconButton>
                   <Avatar
                     sx={{
@@ -153,7 +159,7 @@ const Resume = () => {
                     src={userData.image}
                   />
                 </IconButton>
-              </Box>
+              {/* </Box> */}
               <Box 
               // display={"flex"}  flexDirection={"column"} justifyContent={"center"} alignItems={"center"}
               >
@@ -242,9 +248,7 @@ const Resume = () => {
                     Skill
                   </Typography>
                   <Box paddingLeft={3} paddingTop={1}>
-                    <Typography
-                    //    sx={{paddingLeft: '13px' }}
-                    >
+                    <Typography fontWeight="bold">
                       {userData.skill1}{' '}
                     </Typography>
                     <Typography sx={{ paddingLeft: '20px' }}>
@@ -252,9 +256,7 @@ const Resume = () => {
                     </Typography>
                   </Box>
                   <Box paddingLeft={3} paddingTop={1}>
-                    <Typography
-                    //    sx={{paddingLeft: '13px' }}
-                    >
+                    <Typography fontWeight="bold">
                       {userData.skill2}{' '}
                     </Typography>
                     <Typography sx={{ paddingLeft: '20px' }}>
@@ -269,23 +271,12 @@ const Resume = () => {
                     <AddBoxIcon/>
                     Others
                   </Typography>
-                  <Box paddingLeft={3} paddingTop={1}>
-                    <Grid container>
-                      <Grid item md={6}>
-                        <Typography>Nationality : </Typography>
-                        <Typography>Gender : </Typography>
-                        <Typography>Date of Birth : </Typography>
-                        <Typography>Hobbies : </Typography>
-                        <Typography>Language : </Typography>
-                      </Grid>
-                      <Grid item md={6}>
-                        <Typography>{userData.nationality}</Typography>
-                        <Typography> {userData.gender}</Typography>
-                        <Typography> {userData.dateOfBirth}</Typography>
-                        <Typography> {userData.hobbies}</Typography>
-                        <Typography> {userData.language}</Typography>
-                      </Grid>
-                    </Grid>
+                  <Box paddingLeft={1} paddingTop={1}>
+                        <Typography><span>Nationality : {userData.nationality}</span> </Typography>
+                        <Typography>Gender <span style={{paddingLeft: '20px'}}>: {userData.gender}</span> </Typography>
+                        <Typography >Birth date <span style={{paddingLeft: '5px'}}></span>: {userData.dateOfBirth}</Typography>
+                        <Typography >Hobbies <span style={{paddingLeft: '15px'}}></span> :  {userData.hobbies}</Typography>
+                        <Typography>Language <span style={{paddingLeft: '2px'}}></span> : {userData.language} </Typography>         
                   </Box>
                 </Box>
               </Grid>
@@ -321,14 +312,13 @@ const Resume = () => {
                       paddingLeft: '30px',
                     }}
                   >
-                    <Typography>cousre: {userData.course}</Typography>
-                    <Typography>college: {userData.collegeName}</Typography>
-                    <Typography>
-                      university: {userData.universityName}
+                    <Typography><span style={{paddingRight: "30px"}}>cousre</span>: { userData.course}</Typography>
+                    <Typography><span style={{paddingRight: "28px"}}>college</span>: {userData.collegeName}</Typography>
+                    <Typography><span style={{paddingRight: "11px"}}>  university</span>: {userData.universityName}
                     </Typography>
-                    <Typography>grade: {userData.grade}</Typography>
-                    <Typography>
-                      Session: {userData.yearOfPassing} - {userData.yearOfStarting}
+                    <Typography><span style={{paddingRight: "38px"}}>grade</span>: {userData.grade}</Typography>
+                    <Typography><span style={{paddingRight: "23px"}}>
+                      Session</span>: {userData.yearOfStarting} - {userData.yearOfPassing}
                     </Typography>
                   </Box>
                   <Box></Box>
@@ -346,7 +336,7 @@ const Resume = () => {
                       paddingLeft: '30px',
                     }}
                   >
-                    <Typography> {userData.title}</Typography>
+                    <Typography fontWeight="bold"> {userData.title}</Typography>
                     <Typography sx={{ paddingLeft: '20px' }}>
                       {userData.description}
                     </Typography>
@@ -384,7 +374,7 @@ const Resume = () => {
             </Grid>
           </Box>
         </Paper>
-      </Box>
+      {/* </Box> */}
       <Box margin={2}>
         <Button onClick={handlePrint} variant="contained">
           Download

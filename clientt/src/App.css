@@ -3,8 +3,8 @@
     margin: 0px;
     box-sizing: border-box;
 }
-.nav_bar{
-    height: 4rem;
+/* .nav_bar{ */
+    /* height: 4rem;
     width: 100%;
     background-color: rgb(197, 241, 241);
     border-bottom: 0.1rem solid rgb(240, 224, 224);
@@ -27,10 +27,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
+} */
 
 /* //=================          home_container */
-.home_container{
+/* .home_container{
     height: 100vh;
     width: 100%;
     background-color: rgb(250, 234, 214);
@@ -44,7 +44,7 @@
 
 .home_container_content h1{
     /* font-size: 5rem; */
-}
+/* }
 .home_container_content p{
     font-size: 1.5rem;
     text-align: center;
@@ -61,18 +61,18 @@
     text-decoration: none;
     font-size: 2rem;
     /* background-color: blue; */
-    color: white;
-}
+    /* color: white; */
+/* } */
 
 /* //=========================  login */
 
-.login_container_form{
-    
+.login_container_form{ 
     height: calc(100vh - 64px);
     background-color: antiquewhite;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 64px;
 }
 .login_container{
    width: 30%;

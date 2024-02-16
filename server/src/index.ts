@@ -6,14 +6,13 @@ import { User } from './entity/user';
 const cors = require('cors');
 
 const session = require('express-session');
-import { SessionData }  from "express-session"
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 
 
 const personal_details = require('./routes/formData')
-
+const login_details = require('./routes/login')
 
 
 const app = express();
@@ -30,16 +29,8 @@ interface UserI{
   image: string
   
 }
-interface CustomRequest extends Request {
-  user?: any;
-}
-
-interface MySessionData extends SessionData {
-  google_oauth2_state?: string;
-}
-
 app.use(cors({
-  origin: 'http://localhost:3000', // Replace with your client's origin
+  origin: 'http://localhost:3000',
   credentials: true,
 }));
 
@@ -62,13 +53,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-
 app.use(personal_details)
-
-
-
-// console.log("first");
 
 passport.use(
     new GoogleStrategy({
@@ -77,9 +62,9 @@ passport.use(
         callbackURL: "/auth/google/callback",
         scope: ['profile', 'email'],
     },  async (accessatoken: string, refreshToken: string, profile: any, done:any) => {
-        console.log(profile);
-        console.log(profile.emails[0].value);
-        console.log("id", profile.id);
+        // console.log(profile);
+        // console.log(profile.emails[0].value);
+        // console.log("id", profile.id);
         
         
         try{
@@ -116,8 +101,7 @@ passport.deserializeUser((user: any, done:any)=>{
 app.get('/auth/google',
   passport.authenticate('google', {
      scope: ['profile', 'email'],
-     prompt: 'select_account consent', 
-    //  state: true,
+     prompt: 'select_account consent',
     }
     ));
 
@@ -129,52 +113,9 @@ app.get('/auth/google/callback',
 }),
  );
  
- console.log('before login');
+//  console.log('before login');
  
-  app.get("/login", async (req: CustomRequest, res: Response)=>{
-   if(req.user){
-  
-    console.log("dfghj",req.user);
-    
-    try {
-      const userId = req.user.id;
-      console.log("id", userId);
-      
-      const userRepo = AppDataSouece.getRepository(User);
-      const userData = await userRepo.find({where: {id: userId}});
-
-      if (userData) {
-        console.log(userData);
-        
-        res.status(200).json({ message: "user login", user: userData });
-      } else {
-        res.status(404).json({ message: "User not found" });
-      }
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-      res.status(500).json({ message: "Internal Server Error" });
-    }
-  }
-   else{
-    res.status(400).json({message: "user unauthorized"})
-
-   }
- })
- app.get('/logout', (req: Request, res: Response, next)=>{
-  req.logout(function(err){
-    if(err){
-      return next(err)
-    }
-    res.redirect('http://localhost:3000');
-    // req.session.destroy(() => {
-    //   res.redirect('http://localhost:3000');
-    // });
-  })
- 
-  
-} )
-
-
+app.use(login_details)
 
 AppDataSouece.initialize()
   .then(() => {

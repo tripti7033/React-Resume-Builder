@@ -1,6 +1,10 @@
-// var express = require("express")
-// var router = express.Router();
+const express = require('express')
+const router = express.Router();
+const loginController = require('../repositories/loginRepo');
 
-// router.post('/login')
 
-// module.exports = router
+router.get('/login', loginController.getLoginData)
+router.get('/logout', loginController.getLogout);
+
+module.exports = router;
+export {};
