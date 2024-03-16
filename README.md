@@ -47,9 +47,9 @@ This project is a Resume Builder application that allows users to create their r
 3. Install dependencies for backend:
 
    ```bash
-     cd ../server
-     npm install
-   ```
+   cd ../server
+   npm install
+  ```
     
 4. Set up the database:
    
