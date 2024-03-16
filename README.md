@@ -20,6 +20,7 @@ This project is a Resume Builder application that allows users to create their r
 - JavaScript
 - React.js
 - Material-UI (for UI components)
+- TypeScript
 - Google auth (for login)
 
 ### Backend
