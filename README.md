@@ -1,14 +1,14 @@
 # Resume Builder Project
 
-This project is a Resume Builder application that allows users to create and customize their resumes. It provides a user-friendly interface for inputting personal and professional information and generates a formatted resume document based on the entered data.
+This project is a Resume Builder application that allows users to create their resumes. It provides a user-friendly interface for inputting personal and professional information and generates a formatted resume document based on the entered data. 
 
 ## Features
 
 - User registration and authentication
 - Input forms for personal details, education, work experience, skills, etc.
 - Dynamic preview of the resume as information is entered
-- Ability to customize the layout and design of the resume
 - Export functionality to generate the resume in various formats (e.g., PDF, Word)
+- Logout option for ending user sessions.
 
 
 ## Technologies Used
@@ -39,36 +39,36 @@ This project is a Resume Builder application that allows users to create and cus
    
 2. Install dependencies for frontend:
 
-    ```bash
+   ```bash
     cd Resume-Builder/clientt
     npm install
-   ```
+  ```
 
 3. Install dependencies for backend:
 
-    ```bash
-    cd ../server
-    npm install
-    ```
+   ```bash
+   cd ../server
+   npm install
+   ```
     
 4. Set up the database:
    
    ```bash
-   - Install MongoDB if not already installed.
-   - Create a new MongoDB database and configure the connection in `backend/config/database.js`.
-  ```
+   Install Postgres Database if not already installed.
+   Create a new database named 'resumeBuilder'.
+   ```
 
 5. Start the backend server:
 
    ```bash
-     npm start
-   ```
+    npm run dev
+    ```
 
 6. Start the frontend development server:
    
    ```bash
-     cd ../clientt
-     npm start
+    cd ../clientt
+    npm start
    ```
    
 7. Access the application in your web browser at `http://localhost:3000`.
