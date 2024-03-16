@@ -89,7 +89,6 @@ This project is a Resume Builder application that allows users to create their r
   checkout live Demo [here](https://drive.google.com/file/d/1voV5mGT-mThxanxkglmwDK9rzRrqgQ8N/view?usp=drive_link)
 
 ## Demo images
-![Resume builder project screenshot](https://drive.google.com/file/d/1DpMB_pvG7h8hVDExYdvNnljSH7fyxlgn/view?usp=drive_link)
-
+![Resume builder project screenshot]((https://github.com/tripti7033/Resume-Builder/assets/139527960/1d40676a-0028-4eb5-b117-0f2421d8ad7a)
 
 
