@@ -2,6 +2,14 @@
 
 This project is a Resume Builder application that allows users to create their resumes. It provides a user-friendly interface for inputting personal and professional information and generates a formatted resume document based on the entered data. 
 
+## demo screenshots
+
+![screenshot](https://drive.google.com/drive/folders/14eDmnJmmCks2i4THwdKzoczxT8ChMyxM?usp=drive_link)
+
+## Demo video
+
+checkout live video [here](https://drive.google.com/file/d/1voV5mGT-mThxanxkglmwDK9rzRrqgQ8N/view?usp=drive_link)
+
 ## Features
 
 - User registration and authentication
