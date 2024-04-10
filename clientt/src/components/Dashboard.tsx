@@ -235,14 +235,14 @@ const FormDashboard: React.FC = () => {
                 </Grid>
                 <Grid item xs={12} md={6}>
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <div>
+                  
                       <DatePicker
                         label="Date of Birth"
                         name="dateOfBirth"
                         value={userData.dateOfBirth}
                         onChange={handleDatePickerChange}
                       />
-                    </div>
+                   
                   </LocalizationProvider>
                 </Grid>
 

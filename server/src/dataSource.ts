@@ -12,7 +12,7 @@ export const AppDataSouece = new DataSource(
         port: 5432,
         username: 'postgres',
         password: 'Tripti907@',
-        database: 'resumeBuilder',
+        database: 'resumedb',
         synchronize: true,
         logging: true,
         entities: [User, EducationDetails, PersonalDetails, Skills, Project]

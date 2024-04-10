@@ -68,13 +68,13 @@ const Resume = () => {
     const fetchData = async () => {
       try{
         const response = await axios.get(
-          `http://localhost:6005/users/2/preview`
+          `http://localhost:6005/users/1/preview`
         );
         
-        const id= parseInt(userid)-2
-        // const dataArray = response.data
-        // const id = dataArray.length -1;
-        console.log(id, "data");
+        // const id= parseInt(userid)-2
+        const dataArray = response.data
+        const id = dataArray.length -1;
+        // console.log(id, "data");
         const result = response.data[id];
         // console.log(result);
         // console.log(result.image);
