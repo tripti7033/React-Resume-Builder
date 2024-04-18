@@ -3,7 +3,10 @@ import 'reflect-metadata'
 import express, { Request, Response } from 'express';
 import { AppDataSouece } from './dataSource';
 import { User } from './entity/user';
+// import path from 'path';
 const cors = require('cors');
+
+// const buildPath = path.join(__dirname, "../../clientt/build")
 
 const session = require('express-session');
 const passport = require('passport');
@@ -29,12 +32,28 @@ interface UserI{
   image: string
   
 }
+
+// app.use(express.static(buildPath))
+// app.get('/*', function(req, res){
+//   res.sendFile(
+//     path.join(__dirname, "../../clientt/build/index.html"),
+//     function (err){
+//       if(err){
+//         res.status(500).send(err);
+//       }
+//     }
+//   )
+// })
+
 app.use(cors({
   origin: 'http://localhost:3000',
   credentials: true,
 }));
 
 app.use(express.json());
+
+
+
 
 
 app.get('/', (req, res) => {
